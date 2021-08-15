@@ -15,5 +15,38 @@ with dados_fonte as (
         ship_postal_code as cep_entrega,
         freight as frete
     from {{ source('northwind_etl', 'orders')}}
-)
-select * from dados_fonte
+),
+
+    pedido_item as (
+        select
+        order_id as id_pedido,
+        sum(quantity) as quantidade_total,
+        sum(unit_price*(1-discount)*quantity) as valor_faturado,
+        count (*) as quantidade_itens
+        from {{ source('northwind_etl', 'order_details')}}
+        group by order_id
+    ),
+
+    unificar_dados as (
+        select
+        dados_fonte.id_pedido,
+        id_funcionario,
+        id_cliente,
+        id_transportadora,
+        data_pedido,
+        data_prevista,
+        endereco_entrega,
+        cidade_entrega,
+        regiao_entrega,
+        pais_entrega,
+        data_expedicao,
+        recebedor,
+        cep_entrega,
+        frete,
+        quantidade_total,
+        valor_faturado,
+        quantidade_itens
+        from dados_fonte
+        left join pedido_item on dados_fonte.id_pedido = pedido_item.id_pedido
+    )
+select * from unificar_dados
