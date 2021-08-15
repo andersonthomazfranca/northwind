@@ -1,0 +1,54 @@
+
+version: 2
+
+models:
+    - name: fact_pedidos
+      description: "Esta é a tabela de fato pedidos da northwind, e a granularidade dessa tabela é o pedido"
+      columns:
+          - name: id_pedido
+            description: "É a chave primaria, natural, da tabela fato pedidos"
+            tests:
+                - unique
+                - not_null
+
+    - name: dim_clientes
+      description: "Esta é a tabela de dimensão clientes da northwind"
+      columns:
+          - name: sk_cliente
+            description: "Esta é a chave surrogate da tabela dimensão clientes"
+            tests:
+                - unique
+                - not_null
+
+    - name: dim_fornecedores
+      description: "Esta é a tabela de dimensão forncedores da northwind"
+      columns:
+          - name: sk_fornecedor
+            description: "Esta é a chave surrogate da tabela dimensão forncedores"
+            tests:
+                - unique
+                - not_null
+    - name: dim_funcionarios
+      description: "Esta é a tabela de dimensão funcionarios da northwind"
+      columns:
+          - name: sk_funcionario
+            description: "Esta é a chave surrogate da tabela dimensão Funcionarios"
+            tests:
+                - unique
+                - not_null
+    - name: dim_produtos
+      description: "Esta é a tabela de dimensão produtos da northwind"
+      columns:
+          - name: sk_produto
+            description: "Esta é a chave surrogate da tabela dimensão produtos"
+            tests:
+                - unique
+                - not_null
+    - name: dim_transportadoras
+      description: "Esta é a tabela de dimensão transportadoras da northwind"
+      columns:
+          - name: sk_transportador
+            description: "Esta é a chave surrogate da tabela dimensão transportadoras"
+            tests:
+                - unique
+                - not_null
