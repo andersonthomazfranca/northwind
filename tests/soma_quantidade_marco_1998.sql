@@ -1,6 +1,6 @@
 with soma_quantidade as (
     select
-        sum (quantidade_total) as qnt
+        sum (quantidade) as qnt
         from {{ ref('fact_pedidos')}}
         where data_pedido
         between '1998-03-01' and '1998-03-31'
